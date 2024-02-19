@@ -1,0 +1,18 @@
+[19-02-2024 11:23:43] SELECT 
+                        id          as id,
+                        good_id     as good_id,
+                        available   as available,
+                        picture     as picture,
+                        url         as url,
+                        price       as price,
+                        old_price   as old_price,
+                        categoryId  as categoryId,
+                        store       as store,
+                        pickup      as pickup,
+                        name        as name,
+                        vendor      as vendor,
+                        size        as size,
+                        color       as color,
+                        item_id     as item_id,
+                        error       as error
+                 FROM good WHERE shop_id = 223876149 AND available = 1 AND item_id IS NULL AND error = 0  AND id >  160 GROUP BY good_id  ORDER BY id ASC  LIMIT 1

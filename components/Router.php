@@ -56,7 +56,6 @@ class Router extends Taskmanager
         $json_html = curl_exec($ch);
         curl_close($ch);
         $json = json_decode($json_html, true);
-        sleep(TIMEOUT);
             if(array_key_exists('error', $json))
             {
                 echo $json['error']['error_msg'];
@@ -81,11 +80,6 @@ class Router extends Taskmanager
             $json = json_decode($json_html, true);
             //echo '<pre>'; print_r($json); echo '<pre>';
             $Loger->setLog($json);
-                /*if(array_key_exists('error', $json))
-                {
-
-                    echo 'zhopito';
-                }*/
                 if(array_key_exists('error', $json))
                 {
                     sleep(ERROR_TIMEOUT);

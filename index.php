@@ -20,15 +20,14 @@
         echo "Error! GROUP_ID no define. Define in '/config/config.php' ";
         die();
     } 
-    if(!defined('TIMEOUT') || TIMEOUT < 5)
+    if(!defined('TIMEOUT') || TIMEOUT < 3)
     {
-        echo "Error! TIMEOUT no define or TIMEOUT < 5. Minimal TIMEOUT is 5 sec. Define in '/config/config.php' ";
+        echo "Error! TIMEOUT no define or TIMEOUT < 3. Minimal TIMEOUT is 3 sec. Define in '/config/config.php' ";
         die();
     } 
 
     date_default_timezone_set('Europe/Moscow');
     set_time_limit(0);
-    //set_time_limit(60 * 2);
     require_once __DIR__.'/config/mysqli_db_connect.php';
     require_once __DIR__.'/components/Loger.php';
     require_once __DIR__.'/components/Taskmanager.php';  
@@ -56,12 +55,7 @@
         {
             $dis_no = '';
             $disabled = 'disabled';
-        }
-        /*if(array_key_exists('task', $_GET))
-        {
-            $task = $_GET['task'];
-        }*/
-                    global $cronTask;
+        }           global $cronTask;
 
                     if($cronTask == 'sync')
                     {
@@ -116,6 +110,13 @@
                                 
                                 $Loger->setLog('[Info] Goods created...');
                             }
+                            if(defined('CONSOOLE_ROOT')) 
+                            {
+                                $Root = CONSOOLE_ROOT;
+                            }else{
+                                $Root = $_SERVER['DOCUMENT_ROOT'];
+                            }
+                            GoodsProcessor::fsCleardir($Root.'/images/shop_'.GROUP_ID);
                             $Router->deleteAllTasks();   
                             echo 'ALL DONE!';   
                             $Loger->setLog('[Info] ALL DONE!');
